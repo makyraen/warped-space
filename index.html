@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>Warped Space - Gravity Visualization</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48" />
+    <style>
+        body { margin: 0; overflow: hidden; background: #000; font-family: 'Pretendard', sans-serif; }
+        
+        #ui-layer { position: absolute; top: 20px; left: 20px; z-index: 10; color: white; pointer-events: none; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
+        
+        h1 { margin: 0 0 10px 0; font-weight: 300; font-size: 1.5rem; letter-spacing: 2px; }
+        .controls-info { font-size: 0.8rem; opacity: 0.7; line-height: 1.6; }
+        
+        #btn-container { pointer-events: auto; margin-top: 20px; display: flex; gap: 10px; }
+        
+        button { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 10px 20px; border-radius: 30px; cursor: pointer; backdrop-filter: blur(5px); transition: all 0.3s; font-size: 0.9rem; }
+        button:hover { background: rgba(255, 255, 255, 0.3); transform: scale(1.05); }
+        button.active { background: #ff8800; border-color: #ff8800; color: black; font-weight: bold; }
+        button:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+        
+        #btn-reset { border-color: #ff4444; color: #ffcccc; }
+        #btn-reset:hover { background: rgba(255, 68, 68, 0.3); }
+        
+        #mass-count { margin-top: 10px; font-size: 0.8rem; color: #ff8800; }
+        #model-note { margin-top: 4px; font-size: 0.75rem; opacity: 0.6; max-width: 420px; line-height: 1.5; }
+        #btn-toggle-model.flamm { background: #00bbff; border-color: #00bbff; color: black; font-weight: bold; }
+        
+        #context-menu { display: none; position: absolute; z-index: 100; background: rgba(0, 0, 0, 0.8); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); padding: 5px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        
+        #btn-delete-mass { background: transparent; border: none; color: #ff6666; padding: 8px 15px; font-size: 0.9rem; cursor: pointer; width: 100%; text-align: left; }
+        #btn-delete-mass:hover { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+        #btn-delete-mass.locked { color: #9aa0a6; cursor: not-allowed; line-height: 1.4; }
+        #btn-delete-mass.locked:hover { background: transparent; }
+        #btn-delete-mass.locked small { display: block; opacity: 0.65; font-size: 0.78rem; margin-top: 2px; }
+    </style>
+</head>
+<body>
+    <script type="importmap"> { "imports": { "three": "https://unpkg.com/three@0.164.1/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.164.1/examples/jsm/" } } </script>
+    <div id="context-menu"><button id="btn-delete-mass">🗑️ Delete Mass</button></div>
+    <div id="ui-layer">
+        <h1>WARPED SPACE</h1>
+        <div class="controls-info">
+            <b>View Mode:</b> <span id="view-mode-text">GOD MODE</span><br>
+            <b>Switch View:</b> V key or 'Switch View' button<br>
+            <b>Add Mass:</b> M key (다시 누르면 취소) or 'Add Mass' button → Hold & Release<br>
+            <b>Toggle Model:</b> C key or 'Model' button (Rubber-sheet ↔ Flamm)<br>
+            <b>Add N at once:</b> 1–5 keys (최대 5개까지)<br>
+            <b>Placement:</b> R key → <span id="placement-mode">Fixed</span> (Fixed ↔ Random)<br>
+            <b>Delete:</b> Right-Click on Mass (중심 질량 제외)<br>
+            <b>Move (FPS):</b> W, A, S, D (Thrust)<br>
+            <b>Look (FPS):</b> Drag Mouse<br>
+            <b>Space (FPS):</b> 격자면 붙기 ↔ 자유비행 (질량 도착 후)
+        </div>
+        <div id="mass-count">Masses: 0 / 5</div>
+        <div id="model-note">Rubber-sheet: Plummer 소프트닝 퍼텐셜 (−K·m/√(r²+ε²))</div>
+        <div id="btn-container">
+            <button id="btn-toggle-model">Model: Rubber-sheet (C)</button>
+            <button id="btn-toggle-view">Switch View (V)</button>
+            <button id="btn-add-mass">✚ Add Mass (M)</button>
+            <button id="btn-reset">↺ Reset All</button>
+        </div>
+    </div>
+    <canvas id="webgl"></canvas>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

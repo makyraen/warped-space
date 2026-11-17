@@ -1,0 +1,66 @@
+{
+ "meta": {
+  "M": 5,
+  "R0": 200,
+  "K": 0.85,
+  "DTAU": 2.1666666666666665,
+  "SECONDS": 120,
+  "Lnewt": 26.87936011143122,
+  "Lcirc": 32.879797461071455,
+  "Lschw": 27.947827841910737,
+  "keplerTheory": {
+   "rMin": 113.11154598825831,
+   "eccentricity": 0.2775000000000001
+  }
+ },
+ "cases": {
+  "A_kepler": {
+   "L": 26.87936011143122,
+   "correction": false,
+   "rMin": 113.11,
+   "rMax": 200,
+   "eccentricity": 0.2775,
+   "periodDisplay": 21.17,
+   "periodTau": 5504.3,
+   "precessionDeg": -0.0001,
+   "periapsisCount": 6,
+   "boundary": false
+  },
+  "B_schwarzschildSameIC": {
+   "L": 26.87936011143122,
+   "correction": true,
+   "rMin": 92.62,
+   "rMax": 200,
+   "eccentricity": 0.3669,
+   "periodDisplay": 20.359,
+   "periodTau": 5293.4,
+   "precessionDeg": 52.2317,
+   "periapsisCount": 6,
+   "boundary": false
+  },
+  "C_schwarzschildMode": {
+   "L": 27.947827841910737,
+   "correction": true,
+   "rMin": 106.29,
+   "rMax": 200,
+   "eccentricity": 0.306,
+   "periodDisplay": 21.717,
+   "periodTau": 5646.3,
+   "precessionDeg": 46.6712,
+   "periapsisCount": 6,
+   "boundary": false
+  },
+  "C_noCorrection": {
+   "L": 27.947827841910737,
+   "correction": false,
+   "rMin": 128.16,
+   "rMax": 200,
+   "eccentricity": 0.2189,
+   "periodDisplay": 22.715,
+   "periodTau": 5905.8,
+   "precessionDeg": -0.0001,
+   "periapsisCount": 5,
+   "boundary": false
+  }
+ }
+}
